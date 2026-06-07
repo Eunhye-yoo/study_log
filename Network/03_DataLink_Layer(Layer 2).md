@@ -19,6 +19,7 @@ Frame은 Data Link Layer에서 사용하는 PDU로,
 출발지 MAC Address와 목적지 MAC Address 등의 정보를 포함한 데이터 단위이다.
 
 쉽게 말해 데이터를 MAC 주소 정보와 함께 포장한 "봉투"라고 생각하면 된다.
+
 ---
 
 ## MAC Address
