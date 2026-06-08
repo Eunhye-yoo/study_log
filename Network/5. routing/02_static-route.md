@@ -198,7 +198,7 @@ PC1
 172.16.0.10
 ```
 
-![Static Route](../images/static-routing-topology.png)
+![Static Route](../images/routing/static-routing-topology.png)
 
 ---
 
@@ -225,7 +225,7 @@ no shutdown
 ip route 172.16.0.0 255.255.0.0 1.1.1.2
 ```
 
-![Static Route](../images/static-route-setting.png)
+![Static Route](../images/routing/static-route-setting.png)
 
 ---
 
@@ -288,7 +288,7 @@ O = OSPF
 D = EIGRP
 ```
 
-![Static Route](../images/static-route-showip.png)
+![Static Route](../images/routing/static-route-showip.png)
 
 ---
 
@@ -308,7 +308,7 @@ Reply from ...
 
 메시지가 출력된다.
 
-![Static Route](../images/static-route-ping.png)
+![Static Route](../images/routing/static-route-ping.png)
 
 ---
 
