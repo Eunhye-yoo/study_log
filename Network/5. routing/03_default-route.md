@@ -85,6 +85,7 @@ Router1 하나뿐
 하면 된다.
 
 그래서 Default Route는 보통 Stub Network에서 사용한다.
+![Default Route](../images/routing/stub-Network.png)
 
 ---
 
@@ -284,7 +285,7 @@ Linux : 64
 
 Cisco : 255
 ```
-
+![Default Route](../images/routing/TTL.png)
 ---
 
 ## Default Route의 장점
