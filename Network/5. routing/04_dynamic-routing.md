@@ -2,111 +2,76 @@
 
 ## Dynamic Routing이란?
 
-Dynamic Routing(동적 라우팅)은 Router가 자신이 알고 있는 네트워크 정보를 다른 Router와 자동으로 교환하여 Routing Table을 만드는 방식이다.
+Dynamic Routing(동적 라우팅)은 Router가 자신이 알고 있는 네트워크 정보를 다른 Router와 자동으로 교환하여 Routing Table을 생성하는 방식이다.
 
-Static Routing은 관리자가 직접 경로를 입력하지만,
-
-Dynamic Routing은 Router끼리 서로 정보를 주고받으며 경로를 학습한다.
+Static Routing처럼 관리자가 모든 경로를 직접 입력하지 않아도 되며, Router끼리 정보를 광고(Advertisement)하고 학습하여 경로를 자동으로 관리한다.
 
 ```text
-Router A
-     ↕
-Router B
-     ↕
-Router C
+Router0
+   ↕
+Router1
+   ↕
+Router2
 ```
 
-각 Router는 자신이 알고 있는 네트워크를 광고(Advertisement)하고,
-
-다른 Router의 광고를 받아 Routing Table을 자동으로 갱신한다.
+각 Router는 자신이 알고 있는 네트워크를 광고하고, 다른 Router의 광고를 받아 Routing Table에 등록한다.
 
 ---
 
 ## 왜 Dynamic Routing을 사용할까?
 
-Static Routing은 Router가 많아질수록 관리가 어려워진다.
+Static Routing은 Router 수가 적을 때는 간단하지만 네트워크 규모가 커질수록 관리가 어려워진다.
 
-예)
+예를 들어 Router가 2~3대라면 수동 설정이 가능하지만, 수십 대 이상이 되면 수백 개의 경로를 직접 관리해야 한다.
 
-```text
-Router 2대
-→ 설정 몇 줄
-```
-
-```text
-Router 50대
-→ 수백 개의 경로 입력
-```
-
-네트워크 규모가 커질수록 관리가 힘들어진다.
-
-Dynamic Routing은 Router끼리 자동으로 정보를 교환하므로 대규모 네트워크에서 효율적이다.
+Dynamic Routing은 Router끼리 자동으로 정보를 교환하기 때문에 대규모 네트워크에서 효율적이다.
 
 ---
 
-## Dynamic Routing 동작 방식
+## Dynamic Routing 동작 과정
 
-Router는 주기적으로 자신이 알고 있는 네트워크를 광고한다.
+Router는 자신이 직접 연결된 네트워크 정보를 주기적으로 광고한다.
 
 예)
 
 ```text
 Router0
-
 192.168.53.0/24 보유
-```
 
 ↓
 
-```text
 Router1에게 광고
-```
 
 ↓
 
-```text
 Router1 Routing Table 등록
-```
 
 ↓
 
-```text
 다른 Router에게 재광고
 ```
 
-결과적으로 모든 Router가 서로의 네트워크를 학습하게 된다.
+이 과정을 반복하면서 모든 Router가 네트워크 정보를 학습하게 된다.
 
 ---
 
-## Dynamic Routing의 장점
+## Dynamic Routing의 특징
 
 ### 자동 경로 학습
 
-관리자가 일일이 경로를 등록하지 않아도 된다.
+Router끼리 정보를 교환하여 Routing Table을 자동으로 생성한다.
 
-### 장애 대응 가능
+### 자동 경로 변경
 
-기존 경로에 문제가 발생하면 새로운 경로를 자동으로 찾는다.
+기존 경로에 문제가 발생하면 새로운 경로를 계산하여 사용한다.
 
 ### 대규모 네트워크에 적합
 
 Router 수가 많아도 관리가 쉽다.
 
----
-
-## Dynamic Routing의 단점
-
-### 설정이 복잡하다
-
-Static Routing보다 설정이 어렵다.
-
 ### 자원 사용
 
-CPU와 메모리를 사용한다.
-
-### 네트워크 트래픽 발생
-
-Router끼리 주기적으로 정보를 교환한다.
+CPU, 메모리, 네트워크 대역폭을 사용한다.
 
 ---
 
@@ -114,87 +79,12 @@ Router끼리 주기적으로 정보를 교환한다.
 
 대표적인 동적 라우팅 프로토콜
 
-```text
-RIP
-```
-
-```text
-OSPF
-```
-
-```text
-EIGRP
-```
-
-```text
-BGP
-```
-
----
-
-### RIP
-
-```text
-거리(Hop Count) 기준
-```
-
-경로 선택
-
-```text
-최대 15 Hop
-```
-
-지원
-
-```text
-소규모 네트워크
-```
-
-에 적합
-
----
-
-### OSPF
-
-```text
-대역폭(Cost) 기준
-```
-
-경로 선택
-
-```text
-빠른 수렴
-```
-
-특징
-
-```text
-기업 네트워크에서 가장 많이 사용
-```
-
----
-
-### EIGRP
-
-Cisco 전용 프로토콜
-
-```text
-대역폭 + 지연시간
-```
-
-등을 함께 고려
-
----
-
-### BGP
-
-인터넷에서 사용하는 라우팅 프로토콜
-
-```text
-AS(Autonomous System)
-```
-
-간 라우팅 수행
+| 프로토콜 | 경로 선택 기준 | 특징 |
+|----------|----------|----------|
+| RIP | Hop Count | 설정 단순 |
+| OSPF | Cost(대역폭) | 기업 환경에서 많이 사용 |
+| EIGRP | 복합 Metric | Cisco 전용 |
+| BGP | 정책 기반 | 인터넷 라우팅 |
 
 ---
 
@@ -206,47 +96,67 @@ AS(Autonomous System)
 show ip route
 ```
 
+Routing Table에서 사용하는 코드
+
+| 코드 | 의미 |
+|--------|--------|
+| C | Connected |
+| S | Static |
+| R | RIP |
+| O | OSPF |
+| D | EIGRP |
+
 예)
 
 ```text
 R 192.168.54.0/24
 ```
 
-```text
-R = RIP
-```
-
----
+→ RIP가 학습한 경로
 
 ```text
 O 192.168.54.0/24
 ```
 
-```text
-O = OSPF
-```
+→ OSPF가 학습한 경로
 
 ---
 
-```text
-D 192.168.54.0/24
-```
+## Static / Default / Dynamic Routing 비교
 
-```text
-D = EIGRP
-```
+| 구분 | Static | Default | Dynamic |
+|--------|--------|--------|--------|
+| 설정 방식 | 수동 | 수동 | 자동 |
+| 경로 수 | 목적지마다 입력 | 1개만 입력 | 자동 생성 |
+| 관리 편의성 | 낮음 | 높음 | 매우 높음 |
+| 대규모 환경 | 비효율 | 부적합 | 적합 |
+| 장애 대응 | 불가능 | 불가능 | 가능 |
+| 대표 명령어 | ip route | ip route 0.0.0.0 0.0.0.0 | RIP, OSPF |
 
 ---
 
-## Dynamic Routing과 Static Routing 비교
+## 언제 사용할까?
 
-| 구분 | Static Routing | Dynamic Routing |
-|--------|--------|--------|
-| 설정 | 수동 | 자동 |
-| 관리 | 어려움 | 쉬움 |
-| CPU 사용 | 적음 | 많음 |
-| 장애 대응 | 불가능 | 가능 |
-| 대규모 환경 | 비효율 | 적합 |
+### Static Routing
+
+```text
+소규모 네트워크
+Router 수가 적은 환경
+```
+
+### Default Routing
+
+```text
+Stub Network
+(말단 네트워크)
+```
+
+### Dynamic Routing
+
+```text
+중대형 네트워크
+기업 환경
+```
 
 ---
 
@@ -259,15 +169,9 @@ Router끼리 자동 학습
 ```
 
 ```text
-광고(Advertisement)
-```
+Advertisement
 
-```text
-자동 Routing Table 생성
-```
-
-```text
-장애 발생 시 자동 우회
+라우팅 정보 광고
 ```
 
 ```text
@@ -278,14 +182,18 @@ RIP = Hop Count
 OSPF = Cost(대역폭)
 ```
 
+```text
+장애 발생 시 자동 우회 가능
+```
+
 ---
 
 ## 정리
 
-- Dynamic Routing은 Router끼리 네트워크 정보를 자동으로 교환하는 방식이다.
+- Dynamic Routing은 Router끼리 자동으로 네트워크 정보를 교환하는 방식이다.
 - Router는 광고(Advertisement)를 통해 경로를 학습한다.
-- 대규모 네트워크에서 주로 사용된다.
-- 장애 발생 시 새로운 경로를 자동으로 찾을 수 있다.
+- 네트워크 규모가 커질수록 Dynamic Routing이 유리하다.
+- 장애 발생 시 새로운 경로를 자동으로 계산할 수 있다.
 - 대표 프로토콜은 RIP, OSPF, EIGRP, BGP가 있다.
 
 ## 한 줄 요약
