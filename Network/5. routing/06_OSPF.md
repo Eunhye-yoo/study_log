@@ -66,8 +66,10 @@ Wildcard Mask : 0.0.0.255
 ## OSPF 설정
 
 router ospf 1
+
 network 192.168.53.0 0.0.0.255 area 0
-network 1.1.1.0 0.0.0.255 area 0
+
+network 1.1.1.0 0.255.255.255 area 0
 
 ### 명령어 설명
 
