@@ -238,7 +238,7 @@ PC1
 172.16.0.10
 ```
 
-> 여기에 Packet Tracer 캡처 이미지를 삽입하면 복습하기 훨씬 좋다.
+![Static Route](../images/static-routing-topology.png)
 
 ---
 
@@ -264,7 +264,7 @@ no shutdown
 ```bash
 ip route 172.16.0.0 255.255.0.0 1.1.1.2
 ```
-
+![Static Route](../images/static-route-setting.png)
 ---
 
 ## Router1 설정
@@ -315,6 +315,8 @@ S = Static Route
 
 1.1.1.2로 전송
 ```
+![Static Route](../images/static-route-showip.png)
+![Static Route](../images/static-route-ping.png)
 
 ---
 
