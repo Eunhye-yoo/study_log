@@ -253,7 +253,7 @@ GW 172.16.0.1
 
 ![RIP Config](../images/routing/rip-config-basic.png)
 
-(R0 또는 R1의 RIP 설정 화면)
+(R0의 RIP 설정 화면)
 
 ![RIP Route](../images/routing/rip-route-basic.png)
 
@@ -280,7 +280,11 @@ PC0
 192.168.53.10/25
 GW 192.168.53.1
 
-        |
+    |
+
+Switch0
+
+    |
 
 R0 G0/0
 192.168.53.1/25
@@ -288,7 +292,11 @@ R0 G0/0
 R0 G0/1
 192.168.53.129/25
 
-        |
+    |
+
+Switch1
+
+    |
 
 PC1
 192.168.53.130/25
@@ -297,7 +305,7 @@ GW 192.168.53.129
 R0 G0/2
 1.1.1.1/8
 
-        |
+    |
 
 R1 G0/2
 1.1.1.2/8
@@ -305,7 +313,11 @@ R1 G0/2
 R1 G0/0
 192.168.54.1/24
 
-        |
+    |
+
+Switch2
+
+    |
 
 PC2
 192.168.54.10/24
@@ -314,30 +326,46 @@ GW 192.168.54.1
 
 ### 목표
 
-- RIPv2 사용
-- Auto Summary 확인
+- RIPv2 설정
+- Auto Summary 동작 확인
 - no auto-summary 차이 확인
+- Subnetting 환경에서 RIP 동작 확인
 
-### 확인 사항
+### 캡처
 
-auto-summary 사용 시
+![RIP Topology](../images/routing/rip-subnet-topology.png)
+
+(토폴로지 전체 캡처)
+
+![Auto Summary](../images/routing/rip-auto-summary.png)
+
+(auto-summary 활성화 상태의 show ip route 결과)
+
+확인 내용
 
 ```text
-192.168.53.0/24
+R 192.168.53.0/24
 ```
 
-로 요약되는지 확인
+로 요약되어 보이는지 확인
 
-no auto-summary 사용 시
+![No Auto Summary](../images/routing/rip-no-auto-summary.png)
+
+(no auto-summary 적용 후 show ip route 결과)
+
+확인 내용
 
 ```text
-192.168.53.0/25
+R 192.168.53.0/25
 
-192.168.53.128/25
+R 192.168.53.128/25
 ```
 
-가 각각 보이는지 확인
----
+두 네트워크가 각각 보이는지 확인
+
+![RIP Ping](../images/routing/rip-subnet-ping.png)
+
+(PC0 → PC2 ping 성공)
 
 ## 실습 3 - Hop Count 확인
 
@@ -351,38 +379,46 @@ no auto-summary 사용 시
 
 ```text
 PC0
+192.168.53.10/24
+GW 192.168.53.1
 
-|
+    |
 
-R0
+Switch0
 
-|
+    |
 
-R1
+R0 G0/0
+192.168.53.1/24
 
-|
+R0 G0/1
+10.10.10.1/24
 
-R2
+    |
 
-|
+R1 G0/0
+10.10.10.2/24
+
+R1 G0/1
+20.20.20.1/24
+
+    |
+
+R2 G0/0
+20.20.20.2/24
+
+R2 G0/1
+192.168.55.1/24
+
+    |
+
+Switch1
+
+    |
 
 PC1
-```
-
-### IP 대역
-
-```text
-PC0 LAN
-192.168.53.0/24
-
-R0-R1
-10.10.10.0/24
-
-R1-R2
-20.20.20.0/24
-
-PC1 LAN
-192.168.55.0/24
+192.168.55.10/24
+GW 192.168.55.1
 ```
 
 ### 목표
@@ -390,22 +426,63 @@ PC1 LAN
 - RIP 학습 확인
 - Hop Count 확인
 - Routing Table 분석
+- RIP 최단 경로 선택 확인
 
-### 확인 명령어
+### 캡처
 
-```bash
-show ip route
-```
+![RIP Topology](../images/routing/rip-hop-topology.png)
 
-### 확인 내용
+(토폴로지 전체 캡처)
+
+![RIP Route](../images/routing/rip-hop-route.png)
+
+(show ip route 결과)
+
+확인 내용
 
 ```text
-192.168.55.0/24
-
-[120/2]
+R 192.168.55.0/24 [120/2]
 ```
 
-Hop Count = 2 확인
+```text
+120 = Administrative Distance
+
+2 = Hop Count
+```
+
+확인
+
+![RIP Ping](../images/routing/rip-hop-ping.png)
+
+(PC0 → PC1 ping 성공)
+
+![RIP Simulation](../images/routing/rip-hop-simulation.png)
+
+(Packet Tracer Simulation Mode)
+
+확인 내용
+
+```text
+PC0
+
+↓
+
+R0
+
+↓
+
+R1
+
+↓
+
+R2
+
+↓
+
+PC1
+```
+
+순서로 패킷이 이동하는지 확인
 
 ---
 
