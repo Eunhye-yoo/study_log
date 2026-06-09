@@ -442,11 +442,19 @@ PC3
 
 ![Trunk Config](../images/switching/trunk-config.png)
 
-(Fa0/24 Trunk 설정)
+(SW0, SW1의 Fa0/24를 Trunk로 설정한 CLI 화면)
 
 ![Show Trunk](../images/switching/show-trunk.png)
 
 (show interfaces trunk 결과)
+
+확인 내용
+
+Fa0/24 = trunk
+
+Allowed VLAN = 10,20
+
+Native VLAN = 1
 
 ![VLAN10 Ping](../images/switching/vlan10-ping.png)
 
