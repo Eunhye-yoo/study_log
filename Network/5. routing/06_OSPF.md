@@ -70,69 +70,17 @@ RIP는 설정이 쉽지만 한계가 있다.
 
 ## OSPF 핵심 개념
 
-OSPF는 Link State 방식으로 동작하며 Dijkstra(다익스트라) 알고리즘을 사용한다.
+OSPF는 Link State 방식으로 동작하며 Dijkstra 알고리즘을 사용한다.
 
-Router들은 서로 링크 상태 정보를 교환하고,
+Router들은 서로 링크 상태 정보를 교환하고 전체 네트워크 지도를 만든 뒤 최적 경로를 계산한다.
 
-각 Router는 전체 네트워크 지도를 만든 뒤 최적의 경로를 계산한다.
+OSPF는 RIP처럼 Hop Count가 아니라 Cost를 사용한다.
 
----
-
-OSPF는 RIP처럼 Hop Count를 사용하지 않고
-
-```text
-Cost
-```
-
-를 사용한다.
-
-Cost는 회선 속도(대역폭)를 기준으로 계산된다.
-
-공식
-
-```text
-Cost = 100,000,000 ÷ Bandwidth(bps)
-```
-
-예)
-
-```text
-100Mbps
-
-↓
-
-Cost = 1
-```
-
-```text
-10Mbps
-
-↓
-
-Cost = 10
-```
-
-즉
-
-```text
-Cost가 낮을수록
-
-더 빠른 경로
-```
-
-이다.
-
-그래서 OSPF는 Router를 조금 더 거치더라도 대역폭이 높은 경로를 선택할 수 있다.
+Cost는 대역폭을 기준으로 계산되며 값이 낮을수록 좋은 경로이다.
 
 ---
 
-OSPF는 대규모 네트워크 관리를 위해
-
-```text
-Area
-```
-
-개념을 사용한다.
+OSPF는 대규모 네트워크 관리를 위해 Area를 사용한다.
 
 가장 중요한 Area는
 
@@ -140,66 +88,50 @@ Area
 Area 0
 ```
 
-이며
+이며 Backbone Area라고 부른다.
 
-```text
-Backbone Area
-```
-
-라고 부른다.
-
-모든 OSPF Area는 결국 Area 0과 연결되어야 한다.
-
-비유하면
-
-```text
-Area 0
-
-=
-
-고속도로 본선
-```
-
-```text
-Area 1, 2, 3
-
-=
-
-지역 도로
-```
-
-라고 생각하면 된다.
+모든 Area는 Area 0과 연결되어야 한다.
 
 ---
 
-AS(Autonomous System)는
+ABR(Area Border Router)은
 
 ```text
-같은 라우팅 정책을 사용하는
-
-하나의 네트워크 그룹
+Area와 Area를 연결하는 Router
 ```
 
 이다.
 
-쉽게 말하면
+예)
 
 ```text
-한 회사의 네트워크
+Area 1
+
+↓
+
+ABR
+
+↓
+
+Area 0
 ```
 
-정도로 이해하면 된다.
+네트워크가 여러 Area로 나뉘어 있을 때 경계 역할을 수행한다.
+
+---
+
+AS(Autonomous System)는 같은 라우팅 정책을 사용하는 네트워크 그룹이다.
+
+쉽게 말하면 하나의 회사 네트워크 정도로 이해하면 된다.
 
 ---
 
 ASBR(Autonomous System Boundary Router)은
 
-내부 네트워크와 외부 네트워크를 연결하는 Router이다.
-
-예)
+OSPF 네트워크와 외부 네트워크를 연결하는 Router이다.
 
 ```text
-OSPF 네트워크
+OSPF
 
 ↓
 
@@ -207,11 +139,8 @@ ASBR
 
 ↓
 
-인터넷
+Internet
 ```
-
-즉 네트워크의 경계 역할을 수행한다.
-
 ---
 
 ## Wildcard Mask란?
