@@ -117,6 +117,7 @@ public class StudentManager {
 			}
 			
 			System.out.println("수정이 완료되었습니다.");
+			System.out.println();
 		}   printStudents();
 	}  
 	
@@ -256,8 +257,9 @@ public class StudentManager {
 									+ "기존 점수로 유지됩니다.");
 					}
 				 } System.out.println("수정이 완료되었습니다.");
+				   System.out.println();
 				 
-			   }   	System.out.print(searchName + " 학생의 현재 과목 리스트: ");
+			   }   	System.out.println(searchName + " 학생의 현재 과목 리스트: ");
 					for(int i=0; i < subjectList.size();i++) {
 						SubInfo subject = subjectList.get(i);
 						System.out.println(subject.getSubName()+" "
