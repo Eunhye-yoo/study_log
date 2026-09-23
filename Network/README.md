@@ -1,55 +1,18 @@
 # Network Study Notes
 
-네트워크 기초부터 Routing, Switching까지 학습하며 정리한 개인 학습 저장소입니다.
+OSI 계층과 주소 지정부터 라우팅·스위칭까지 학습한 개념과 Packet Tracer 실습 결과를 기록합니다.
 
-OSI 7 Layer, TCP/IP, Subnetting, Routing, VLAN, STP 등의 핵심 개념을 이론과 Packet Tracer 실습을 통해 정리하고 있습니다.
+| 경로 | 작성된 내용 |
+| --- | --- |
+| [0.basic](./0.basic%20/) | 네트워크 기본 개념 |
+| [1. OSI](./1.%20OSI/) | OSI 7계층과 각 계층의 역할 |
+| [2. ip](./2.%20ip/) | IP, MAC, ARP, ICMP, NAT |
+| [3. transport](./3.%20transport/) | TCP, UDP |
+| [4. subnetting](./4.%20subnetting/) | 서브네팅, VLSM |
+| [5. routing](./5.%20routing/) | 정적·기본·동적 라우팅, RIP, OSPF |
+| [6. switching](./6.%20switching/) | VLAN, Trunk |
+| [images](./images/) | 라우팅·VLAN 실습 이미지 |
 
-## 학습 범위
+라우팅과 VLAN 문서에는 토폴로지, 설정, 라우팅 테이블 또는 Ping 캡처가 포함된 항목이 있습니다. 문서마다 실습 범위는 다릅니다.
 
-- OSI 7 Layer
-- TCP / UDP
-- IP Address
-- ARP / ICMP
-- Subnetting
-- VLSM
-- Static Routing
-- Default Routing
-- Dynamic Routing
-- RIP
-- OSPF
-- VLAN
-- STP
-- 기타 네트워크 실습
-
-## 폴더 구조
-
-```text
-Network
-├── 0.basic
-├── 1.OSI
-├── 2.ip
-├── 3.transport
-├── 4.subnetting
-├── 5.routing
-├── images
-└── README.md
-```
-
-## 학습 방식
-
-- 개념 정리
-- 명령어 정리
-- Packet Tracer 실습
-- Routing Table 분석
-- 실습 결과 캡처 기록
-
-## 업데이트 예정
-
-- VLAN
-- STP
-- Inter-VLAN Routing
-- EtherChannel
-- ACL
-- DHCP
-- NAT
-- 종합 Lab 실습
+**작성 중:** `6. switching`의 Inter-VLAN Routing, STP, VTP 파일은 현재 내용이 비어 있습니다. EtherChannel, ACL, DHCP 등의 항목은 이 저장소에 아직 없습니다.
