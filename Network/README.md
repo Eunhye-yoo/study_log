@@ -15,8 +15,6 @@ OSI 계층과 주소 지정부터 라우팅·스위칭까지 학습한 개념과
 | [6. switching](./6.%20switching/) | VLAN, Trunk |
 | [images](./images/) | 라우팅·VLAN 실습 이미지 |
 
-## Current Scope
+## 실습 자료
 
-라우팅과 VLAN 문서에는 토폴로지, 설정, 라우팅 테이블 또는 Ping 캡처가 포함된 항목이 있습니다. 문서마다 실습 범위는 다릅니다.
-
-**작성 중:** `6. switching`의 Inter-VLAN Routing, STP, VTP 파일은 현재 내용이 비어 있습니다. EtherChannel, ACL, DHCP 등의 항목은 이 저장소에 아직 없습니다.
+라우팅·VLAN 문서에서 토폴로지, 장비 설정, 라우팅 테이블과 Ping 결과를 확인할 수 있습니다. Inter-VLAN Routing·STP·VTP 항목은 작성 예정입니다.
